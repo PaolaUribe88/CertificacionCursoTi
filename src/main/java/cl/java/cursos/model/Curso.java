@@ -55,9 +55,6 @@ public class Curso {
 	@Lob
 	private byte[] imagen;
 	
-	@OneToMany
-	private Set<Estudiante> estudiantes;
-	
 	@Transient
 	@AssertTrue(message = "Campo 'fechaFin' debe ser una fecha posterior a 'fechaInicio'")
 	private boolean isFechaFinMayorQueFechaInicio() {

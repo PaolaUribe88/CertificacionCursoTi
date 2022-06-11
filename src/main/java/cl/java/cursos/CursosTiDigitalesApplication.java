@@ -42,13 +42,12 @@ public class CursosTiDigitalesApplication {
 											.nombres("Paola")
 											.apellidos("Uribe")
 											.direccion("bla bla 1212")
-											.region("")
 											.telefono("990101000")
 											.email("correo@algo.com")
-											.rut("16635417-k")
+											.rut("16777417-k")
 											.password("1234")
-											.region("")
-											.comuna("")
+											.region("De La Araucania")
+											.comuna("Temuco")
 											.build()
 									;
 				userService.crearUsuario(estudiante);

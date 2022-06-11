@@ -13,8 +13,10 @@
 			<br/>
 			<h1 align="center">Panel estudiante</h1>
 			<br/>
-		<div class="container-fluid bg-dark text-white rounded">
-			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center">
+		<main style="margin: 20px 80px">
+			<br/><h1 align="center">Panel estudiante</h1><br/>
+		<div class="container-fluid shadow-lg">
+			<div class="modal-body row bg-dark text-white rounded shadow-sm d-flex justify-content-center">
 				<h2> Datos del estudiante:</h2>
 				<div class="col-md-6">
 					<div class="col-12 col-md-12 col-lg-9 col-xl-7 col-xxl-6">
@@ -28,6 +30,7 @@
 					</div><br/>
 				</div>
 				<div class="col-md-6">
+				
 				<div class="card-body" align="left">
 					    <p class="fs-5" data-th-text="'Nombre: '+${estudiante.nombres}+' '+${estudiante.apellidos}"></p>
 					    <p class="fs-5" data-th-text="'Correo: '+${estudiante.email}"></p>
@@ -40,11 +43,12 @@
 			</div>
 			
 			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center" data-th-if="${estudiante.curso == null}">
-				<p class="fs-3" style="margin: 100px 0px"> No regista inscripcion de cursos, puede revisar los disponibles -> <a data-th-href="@{/}">Aqui</a></p>
+				<p class="fs-3" style="margin: 100px 0px"> No registra ninguna curso, puede revisar nuestros cursos disponibles desde <a data-th-href="@{/}">aqui</a></p>
 			</div>
 			
-			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center" data-th-if="${estudiante.curso != null}">
-			<p class="fs-3">Está inscrito/a en el siguiente curso:</p>
+			<div class="modal-body row bg-dark text-white rounded shadow-sm d-flex justify-content-center" data-th-if="${estudiante.curso != null}">
+			<p class="fs-3"> Usted está inscrito en el siguiente curso:</p>
+			<hr/>
 				<div class="col-md-6">
 						<div class="card-body" align="left">
 						    <h2 class="card-title" data-th-text="${estudiante.curso.nombre}"></h2>

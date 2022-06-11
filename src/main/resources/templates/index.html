@@ -19,12 +19,18 @@
 				<p class="card-text" data-th-text="${curso.nombre}"></p></div>
 				<div class="card text-white bg-dark mb-3">
 				  <img data-th-src="@{/imagen/{id}(id=${curso.id})}" class="card-img-middle" height="300" style="margin:30px;">
-				  <div class="card-body " align="center">
+				  <div class="card-body ">
 				    <h2 class="card-title" data-th-text="${curso.nombre}"></h2>
-				    <p class="card-text" data-th-text="${curso.descripcion}"></p>
+				    
+					<p class="fs-6 text-light mb-0"><a class="bi bi-people-fill"></a> Cupos: 
+					<span class="card-text text-primary fs-6" data-th-text="${curso.cupos}"></span></p>
+					<p class="fs-6 text-light mb-0"><a class="bi bi-calendar-check"></a> Inicio: 
+					<span class="card-text text-primary fs-6" data-th-text="${curso.fechaInicio}"></span></p>
+					<p class="fs-6 text-light mb-2"><a class="bi bi-calendar-x"></a> Termino: 
+					<span class="card-text text-primary fs-6" data-th-text="${curso.fechaFin}"></span></p>
 					<input type="hidden"  />
-				     <a class="btn btn-primary bg-gradient" data-sec-authorize="isAuthenticated()" data-th-href="@{/postular}">Postular</a>
-				    <a class="btn btn-primary " data-th-href="@{curso/detalle}">Ver Detalles</a>
+				     <a class="btn btn-primary bg-gradient" data-sec-authorize="isAuthenticated()" data-th-href="@{/estudiante/postular/{id}(id=${curso.id})}">Postular</a>
+				   
 				  
 				  </div>
 				</div>

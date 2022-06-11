@@ -9,22 +9,43 @@
 <body style="background-color: fuchsia;">
 	<nav data-th-replace="parts/menu :: menu"></nav>
 
-	<main class="container"><br/>
-	<h1 class="border-bottom pb-2 mb-0">Detalles</h1>
-		<div class="my-3 p-3 bg-body rounded shadow-sm">
-			<form data-th-action="@{/detalle}" data-th-object="${curso}" enctype="multipart/form-data" method="POST">
-			<label class="form-label"> Detalles del Curso:</label> 
-					<select id="detalles" class="form-control" data-th-field="*{detalles}"></select>
+	<nav data-th-replace="component/componentes :: _navbar"></nav>
+	<div class="container bg-dark">
+		<div class="row mt-3"></div>
+		
+		<div class="row mt-5" >
+			<div class="col-12 text-center my-5">
+				<p class="fs-1 text-warning fw-bold font-monospace" data-th-text="${curso.nombre}"></p>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<img alt="" class="img-thumbnail" data-th-src="@{/curso/image/{id}(id=${curso.id})}" >
+				</div>
+				<div class="col-5 d-flex align-items-center text-white">
+					<div class="row">
+						<div class="col-12">
+							<p class="fs-4">Descripcion: </p>
+						</div>
+						<div class="col-12">
+							<p class="fs-6" data-th-text="${curso.descripcion}"></p>
+						</div>
+					</div>
+				</div>
 				
-					<br/>
-						
-				<input type="hidden" data-th-field="*{id}" />
-				<button ><a class="btn btn-primary" data-th-href="@{/}">Home</a></button>
-			</form>
+			<div class="row">
+				<div class="col-12 mt-3">
+					<p class="fs-6 text-white">Fecha inicio: <span class="fs-6" data-th-text="${curso.fechaInicio}"></span></p>
+					<p class="fs-6 text-white">Fecha fin: <span class="fs-6" data-th-text="${curso.fechaFin}"></span></p>
+					<p class="fs-6 text-white">Cupos: <span class="fs-6" data-th-text="${curso.cupos}"></span></p>
+				</div>
+			</div>
+			</div>
 		</div>
-	
-	</main>
-	
-
-</body>
+		<div class="row">
+			<div class="col">
+				<a class="btn btn-outline-danger" data-th-href="@{/}">Volver</a>
+				<a data-sec-authorize="hasAuthority('POSTULANTE')" class="btn btn-outline-success" data-th-href="@{/postulacion/registrar/{id}(id=${curso.id})}">Postular</a>
+			</div>
+		</div>
+	</div>
 </html>

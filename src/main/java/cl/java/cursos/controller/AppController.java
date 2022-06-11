@@ -58,8 +58,8 @@ public class AppController {
 	
 	@GetMapping("/registro")
 	public String registrarEstudiante(Estudiante estudiante) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || auth instanceof AnonymousAuthenticationToken) {
+		Authentication autenticar = SecurityContextHolder.getContext().getAuthentication();
+        if (autenticar == null || autenticar instanceof AnonymousAuthenticationToken) {
         	return "registro";
         }
   
@@ -83,9 +83,10 @@ public class AppController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/salir")
-	public String logout() {
-		return "logout";
-	}
 	
+	@GetMapping("/curso/detalles/{id}")
+	public String detallesCurso(@PathVariable("id")Curso curso, Model modelo) {
+		modelo.addAttribute("curso", curso);
+		return "detalles";
+	}
 }

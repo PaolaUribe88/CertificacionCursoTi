@@ -10,6 +10,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.context.SaveContextOnUpdateOrErrorResponseWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import cl.java.cursos.model.Curso;
 import cl.java.cursos.model.Estudiante;
 import cl.java.cursos.repository.CursoRepository;
 import cl.java.cursos.repository.EstudianteRepository;
+import cl.java.cursos.security.UsuarioSeguridad;
 
 @Controller
 @RequestMapping("/estudiante")
@@ -34,32 +37,26 @@ public class EstudianteController {
 	@Autowired
 	CursoRepository cursoRepository;
 	
-	@GetMapping("/index")
-	public String panelEstudiante(Estudiante estudiante, Principal principal, Model modelo) {
-		Optional<Estudiante> estudiantePrincipal = estudianteRepository.findByRut(principal.getName());
-		if(estudiantePrincipal != null) {
-			modelo.addAttribute(estudiantePrincipal.get());
-			return "estudiante/panel";
-		}
+	@GetMapping("/index")//revisar
+	public String panelEstudiante( Authentication usuarioAutenticado, Model modelo) {
+		UsuarioSeguridad principal = (UsuarioSeguridad) usuarioAutenticado.getPrincipal();
+		Estudiante estudiante = estudianteRepository.findById(principal.getEstudiante().getId()).get();
+		modelo.addAttribute("estudiante", estudiante);
 		return "estudiante/panel";
+		
 	}
 
 	
-	@GetMapping("/postular/{id}/{cursoId}")
-	public String postular(@PathVariable("id") Long id, @PathVariable("cursoId") Long cursoId) {
-		Optional<Estudiante> estudiante = estudianteRepository.findById(id);
-		if(estudiante.get().getCurso() == null) {
-			Optional<Curso> curso = cursoRepository.findById(cursoId);
-			if(curso.get().getCupos() > 0) {
-				estudiante.get().setCurso(curso.get());
-				curso.get().setCupos(curso.get().getCupos()-1);
-				cursoRepository.save(curso.get());
-				estudianteRepository.saveAndFlush(estudiante.get());
-				return "redirect:/estudiante/index";
-			}
+	@GetMapping("/postular/{id}")
+	public String postular(@PathVariable("id") Curso curso, Authentication usuarioAutenticado
+		, Model modelo
+		) {		
+			UsuarioSeguridad principal = (UsuarioSeguridad) usuarioAutenticado.getPrincipal();
+			Estudiante estudiante = principal.getEstudiante();
+			estudiante.setCurso(curso);
+			estudianteRepository.save(estudiante);
+		
 			return "redirect:/";
-		}		
-		return "redirect:/";
 	}
 	@GetMapping("/imagen/{id}")
 	public ResponseEntity<byte[]> muestraImagenes(@PathVariable("id") Long id) throws SQLException, IOException {
