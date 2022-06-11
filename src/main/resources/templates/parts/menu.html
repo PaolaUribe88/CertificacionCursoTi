@@ -2,10 +2,17 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="icon"  type="imagen/x-icon" href="../imagen/favicon.png">
+	
 </head>
 <body style="background-color: fuchsia;">
-<nav class="navbar navbar-expand-lg bg-dark "  data-th-fragment="menu" >
+	<div data-th-fragment="menu" >
+		<div class="logo my-3 ms-5 text-center text-lg-start">
+			<a class="" href="#" data-th-href="@{/}">
+				<img data-th-src="@{/img/cft1-removebg-preview.png}" src="#" alt="Logo" style="width: 150px;"/>
+				<strong style="font-size: 2em;">CFT Tu-PODÍ</strong>
+			</a>
+		</div>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" data-th-fragment="menu"  >
   <div class="container-fluid">
     <a class="navbar-brand" data-th-href="@{/}">Bienvenido <span data-sec-authorize="hasAuthority('ADMINISTRADOR')" data-th-text="${#authentication.getPrincipal().getAdministrador().getUsername()}"></span> 
     <span data-sec-authorize="!isAuthenticated()">invitado</span></a>
@@ -43,6 +50,15 @@
           <a class="nav-link active" data-sec-authorize="isAuthenticated()" data-th-href="@{/salir}">Salir</a>
         </li>
       </ul>
+      <form
+						data-th-action="@{/}"
+						method="get" 
+						class="d-flex" 
+						role="search"
+					>
+        				<input name="q" class="form-control me-2" type="text" placeholder="Buscar" aria-label="Buscar" />
+        				<button class="btn btn-outline-primary" type="submit">Buscar</button>
+      				</form>
     </div>
   </div>
 </nav>
