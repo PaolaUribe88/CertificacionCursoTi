@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
+		<meta charset="UTF-8">
+		<title>Panel de Estudiante</title>
+	</head>
+<body class="body-light" style="background-color: fuchsia;">
+
+	
+	<nav data-th-replace="parts/menu :: menu"></nav>
+		<main class="container">
+			<br/>
+			<h1 align="center">Panel estudiante</h1>
+			<br/>
+		<div class="container-fluid bg-dark text-white rounded">
+			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center">
+				<h2> Datos del estudiante:</h2>
+				<div class="col-md-6">
+					<div class="col-12 col-md-12 col-lg-9 col-xl-7 col-xxl-6">
+						<div class="card text-dark bg-light mb-3">
+						  <img data-th-src="@{/estudiante/imagen/{id}(id=${estudiante.id})}" class="card-img-middle" height="400" style="margin:30px;">
+							<form data-th-action="@{/estudiante/subirimagen}" data-th-object="${curso}" enctype="multipart/form-data" method="POST">
+							<input class="form-control" type="file" id="image-file" name="image" accept="image/jpeg, image/png" />
+								<button type="submit"  id="boton" class="btn btn-primary bg-gradient" >Subir imagen</button>
+							</form>			
+						</div>
+					</div><br/>
+				</div>
+				<div class="col-md-6">
+				<div class="card-body" align="left">
+					    <p class="fs-5" data-th-text="'Nombre: '+${estudiante.nombres}+' '+${estudiante.apellidos}"></p>
+					    <p class="fs-5" data-th-text="'Correo: '+${estudiante.email}"></p>
+					    <p class="fs-5" data-th-text="'Telefono: '+${estudiante.telefono}"></p>
+					    <p class="fs-5" data-th-text="'Region: '+${estudiante.region}"></p>
+					    <p class="fs-5" data-th-text="'Comuna: '+${estudiante.comuna}"></p>
+					    <p class="fs-5" data-th-text="'Direccion: '+${estudiante.direccion}"></p>						    
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center" data-th-if="${estudiante.curso == null}">
+				<p class="fs-3" style="margin: 100px 0px"> No regista inscripcion de cursos, puede revisar los disponibles -> <a data-th-href="@{/}">Aqui</a></p>
+			</div>
+			
+			<div class="modal-body row bg-body rounded shadow-sm d-flex justify-content-center" data-th-if="${estudiante.curso != null}">
+			<p class="fs-3">Está inscrito/a en el siguiente curso:</p>
+				<div class="col-md-6">
+						<div class="card-body" align="left">
+						    <h2 class="card-title" data-th-text="${estudiante.curso.nombre}"></h2>
+						    <p class="fs-5" data-th-text="${estudiante.curso.descripcion}"></p>
+						    <p class="fs-5" data-th-text="'Fecha de inicio: '+${estudiante.curso.fechaInicio}"></p>
+						    <p class="fs-5" data-th-text="'Fecha de termino: '+${estudiante.curso.fechaFin}"></p>
+						</div>
+				</div>
+				<div class="col-md-6" align="center">
+					  <div class="col-12 col-md-12 col-lg-9 col-xl-7 col-xxl-6" data-th-if="${estudiante.curso != null}">
+						<div class="card text-dark bg-light mb-3">
+						  <img data-th-src="@{/imagen/{id}(id=${estudiante.curso.id})}" class="card-img-middle" height="400" style="margin:30px;">
+						</div><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div data-th-replace="parts/scripts :: scripts"></div>
+	<div data-th-replace="parts/footer :: footer"></div>
+	</main>
+</body>
