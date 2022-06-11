@@ -11,4 +11,4 @@ Se solicita
 
 
 ### Realizado por Paola Uribe
-#### Profesor Santiago Neira 
+#### Profesor Santiago Neira https://github.com/stgoneira
