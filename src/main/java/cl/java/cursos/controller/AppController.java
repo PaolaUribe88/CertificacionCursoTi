@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cl.java.cursos.model.Curso;
 import cl.java.cursos.model.Estudiante;
@@ -39,8 +40,15 @@ public class AppController {
 	CursoRepository cursoRepository;
 	
 	@GetMapping("/")
-	public String index(Curso curso, Model modelo) {
-		List<Curso> cursos = cursoRepository.findAll();
+	
+	public String index(@RequestParam (name= "q", defaultValue = "")String filtro
+			, Model modelo) {
+		List<Curso> cursos;
+		if (filtro.isBlank()) {
+			cursos = cursoRepository.findAll();
+		}else {
+			cursos = cursoRepository.findByNombreContaining(filtro);
+		}
 		modelo.addAttribute("cursos",cursos);
 		return "index";
 	}

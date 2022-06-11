@@ -8,12 +8,14 @@
 	<div data-th-fragment="menu" >
 		<div class="logo my-3 ms-5 text-center text-lg-start">
 			<a class="" href="#" data-th-href="@{/}">
-				<img data-th-src="@{/img/cft1-removebg-preview.png}" src="#" alt="Logo" style="width: 150px;"/>
-				<strong style="font-size: 2em;">CFT Tu-PODÍ</strong>
+				<img data-th-src="@{/img/cft1-removebg-preview.png}" src="#" alt="Logo" style="width: 200px;"/>
+				<astrong  style="font-size: 4em; color: black; ">CFT T-PODÍ</a>
+				<img data-th-src="@{/img/tu-removebg-preview.png}" src="#" alt="Logo" style="width: 100px;"/>
+				<a style="font-size: 2em; color: black; text-align: center;">Puedes Lograrlo!</a>
 			</a>
 		</div>
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark" data-th-fragment="menu"  >
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark"  data-th-fragment="menu"  >
+  <div class="container-fluid text-primary" >
     <a class="navbar-brand" data-th-href="@{/}">Bienvenido <span data-sec-authorize="hasAuthority('ADMINISTRADOR')" data-th-text="${#authentication.getPrincipal().getAdministrador().getUsername()}"></span> 
     <span data-sec-authorize="!isAuthenticated()">invitado</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
