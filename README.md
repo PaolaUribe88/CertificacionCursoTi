@@ -1,5 +1,5 @@
 # CertificacionCursoTi
-##Caso Cursos TI Digitales
+## Caso Cursos TI Digitales
 Debido a la creciente demanda laboral en el área TI, el Gobierno le ha encomendado la tarea de crear una plataforma de cursos online. Los interesados podrán matricularse en cursos cortos a un par de clicks de distancia.
 Se solicita
 - crear una zona privada dentro de la plataforma para que el área encargada pueda subir la información de los cursos. 
@@ -11,4 +11,4 @@ Se solicita
 
 
 ### Realizado por Paola Uribe
-### Profesor Santiago Neira 
+#### Profesor Santiago Neira 
